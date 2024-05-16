@@ -30,6 +30,6 @@ jobs:
         # Artifact name
         name: app-release
         # A file, directory or wildcard pattern that describes what to upload
-        path: ./app/release/app-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
         # The desired behavior if no files are found using the provided path.
                 
