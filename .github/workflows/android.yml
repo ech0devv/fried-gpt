@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK 11
+    - name: set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -30,6 +30,6 @@ jobs:
         # Artifact name
         name: app-release
         # A file, directory or wildcard pattern that describes what to upload
-        path: app/build/outputs/apk/release/app-release.apk
+        path: /home/runner/work/fried-gpt/fried-gpt/app/build/outputs/apk/release/app-release-unsigned.apk
         # The desired behavior if no files are found using the provided path.
                 
