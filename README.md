@@ -1,8 +1,6 @@
 # FriedGPT
 
-<img src="https://assistant.teslasoft.org/FriedGPT_BANNER_ANDROID.png" style="width: 100%;"/>
-
-FriedGPT is a fork of FriedGPT
+FriedGPT is a fork of SpeakGPT
 
 > [!NOTE]
 > 
