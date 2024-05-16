@@ -1647,7 +1647,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
         callback("");
     }
     private suspend fun webSearch(args: JsonObject, callback: suspend (String) -> Unit){
-        val htmlified = URL("https://www.w3.org/services/html2txt?url=https%3A%2F%2Fhtml.duckduckgo.com%2Fhtml%3Fq%3D${URLEncoder.encode(StringUtils.substringBetween(args.getValue("query").jsonPrimitive.content, "[2]", "[5]"), "utf-8")}").readText()
+        val htmlified = StringUtils.substringBetween(URL("https://www.w3.org/services/html2txt?url=https%3A%2F%2Fhtml.duckduckgo.com%2Fhtml%3Fq%3D${URLEncoder.encode(args.getValue("query").jsonPrimitive.content, "utf-8")}").readText(), "[2]", "[5]")
         callback(htmlified);
     }
     private suspend fun setTimer(args: JsonObject, callback: suspend (String) -> Unit){
