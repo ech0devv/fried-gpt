@@ -25,9 +25,9 @@ FriedGPT is a fork of SpeakGPT
 > 
 > To change your API provider, go to settings and select the API endpoint. You can also add your custom API provider.
 
-##### note: i'll make this section smaller later
 
 ## Basic features
+##### note: i'll make this section smaller later
 
 - [x] Chat (saved locally but can be imported/exported if needed)
 - [x] Images generation (DALL-e)
