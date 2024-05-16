@@ -4,7 +4,7 @@ FriedGPT is a fork of SpeakGPT
 
 > [!NOTE]
 > 
-> This is a fork of a project which is a part of Dmytro Ostapenko's (the SpeakGPT dev's) Bachelor Thesis. Attribution is required to use his work. Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+> This is a fork of a project that is a part of Dmytro Ostapenko's (the SpeakGPT dev's) Bachelor Thesis. Attribution is required to use his work. Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
 >
 > Cite as: Dmytro Ostapenko (2024), "Review Program Automation Using Copilot Services" Bachelor Thesis, Technical University of Košice, 2024.
 
