@@ -4,7 +4,7 @@ FriedGPT is a fork of SpeakGPT
 
 > [!NOTE]
 > 
-> This project is a part of Dmytro Ostapenko's (the SpeakGPT dev's) Bachelor Thesis. Attribution is required to use this work. Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+> This is a fork of a project which is a part of Dmytro Ostapenko's (the SpeakGPT dev's) Bachelor Thesis. Attribution is required to use his work. Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
 >
 > Cite as: Dmytro Ostapenko (2024), "Review Program Automation Using Copilot Services" Bachelor Thesis, Technical University of Košice, 2024.
 
@@ -27,31 +27,20 @@ FriedGPT is a fork of SpeakGPT
 
 
 ## Basic features
-##### note: i'll make this section smaller later
-
 - [x] Chat (saved locally but can be imported/exported if needed)
-- [x] Images generation (DALL-e)
-- [x] GPT 4 Vision (use your images and photos with ChatGPT)
-- [x] Activation prompt
-- [x] System message
+- [x] Image generation via DALL-E
+- [x] GPT 4 Vision
 - [x] Voice input (Whisper and Google)
-- [x] Assistant
-- [x] FriedGPT in context menu
-- [x] FriedGPT in Share sheet
-- [x] Function calling features
+- [x] Voice Assistant (set as default in settings, and then used by swiping from bottom corners of screen)
+- [x] FriedGPT in context and share menu
+- [x] Function calling
 - [x] ~~Prompts store~~ Removed by FriedGPT (because it's telemetry 🤢)
-- [x] Different chat layout
-- [x] Adaptive design
-- [x] A lot of different models
-- [x] No captcha
-- [x] Pay as you go system
-- [x] Tips for newbies
-- [x] Custom fine-tuned models are supported
+- [x] Material You
+- [x] Various models (including GPT-4o)
 - [x] AMOLED dark mode
 - [x] Custom API provider support
-- [x] Customize models params like temperature, topP, frequencyPenalty, presencePenalty and logit_bias
+- [x] Customize model parameters
 - [x] Playground
-- [x] GPT 4o
 
 ## 🍗 Features added by FriedGPT
 - [x] No telemetry, ads, or anything of that nature.
@@ -67,10 +56,9 @@ If you're concerned, please take the following precautions:
 
 To secure your API key perform the following steps:
 
-1. Make sure you have separate API key for FriedGPT
+1. Make sure you have a separate API key for FriedGPT
 2. Set up billing limit
-3. Enable usage monitoring, so you can see how much resources FriedGPT uses and how much it costs
-4. If you have any concerns you can revoke your API key
+3. Enable usage monitoring, so you can see what FriedGPT is doing and how much it costs
 
 ## License
 
