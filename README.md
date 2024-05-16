@@ -61,7 +61,7 @@ FriedGPT is a fork of SpeakGPT
 ## API key safety:
 
 FriedGPT takes advantage of API keys for privacy and safety. All of the code is open source.
-If you're concerned, please take advantage of the following steps?
+If you're concerned, please take advantage of the following steps:
 
 To secure your API key perform the following steps:
 
