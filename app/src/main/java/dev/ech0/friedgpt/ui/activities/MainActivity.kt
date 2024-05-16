@@ -56,7 +56,6 @@ import dev.ech0.friedgpt.preferences.ApiEndpointPreferences
 import dev.ech0.friedgpt.preferences.DeviceInfoProvider
 import dev.ech0.friedgpt.preferences.Logger
 import dev.ech0.friedgpt.preferences.Preferences
-import dev.ech0.friedgpt.pwa.PWAActivity
 import dev.ech0.friedgpt.ui.fragments.tabs.ChatsListFragment
 import dev.ech0.friedgpt.ui.fragments.tabs.ExploreFragment
 import dev.ech0.friedgpt.ui.fragments.tabs.PlaygroundFragment
@@ -93,24 +92,9 @@ class MainActivity : FragmentActivity(), Preferences.PreferencesChangedListener 
 
     private val requestListener = object : RequestNetwork.RequestListener {
         override fun onResponse(tag: String, message: String) {
-            if (message == "131") {
                 preferences!!.setAdsEnabled(false)
                 startActivity(Intent(this@MainActivity, ThanksActivity::class.java))
                 finish()
-            } else {
-                if (tag == "AID" && !preferences!!.getDebugMode()) {
-                    preferences!!.setAdsEnabled(true)
-                } else {
-                    val androidId = DeviceInfoProvider.getAndroidId(this@MainActivity)
-
-                    requestNetwork?.startRequestNetwork(
-                        "GET",
-                        "${API_ENDPOINT}/checkForDonation?did=${androidId}",
-                        "AID",
-                        this
-                    )
-                }
-            }
         }
 
         override fun onErrorResponse(tag: String, message: String) {
@@ -256,10 +240,6 @@ class MainActivity : FragmentActivity(), Preferences.PreferencesChangedListener 
 
                 Logger.clearAdsLog(this)
 
-                if (preferences!!.getAdsEnabled()) {
-                    requestNetwork = RequestNetwork(this)
-                    requestNetwork?.startRequestNetwork("GET", "${API_ENDPOINT}/checkForDonation?did=${installationId}", "IID", requestListener)
-                }
 
                 if (preferences!!.getDebugMode()) {
                     btnDebugger?.visibility = View.VISIBLE
@@ -273,17 +253,6 @@ class MainActivity : FragmentActivity(), Preferences.PreferencesChangedListener 
 
                     btnInitiateCrash?.setOnClickListener {
                         throw RuntimeException("Test crash")
-                    }
-
-                    btnLaunchPWA?.setOnClickListener {
-                        if (isActivityEnabled(this, "dev.ech0.assistant.pwa.PWAActivity")) {
-                            startActivity(Intent(this, PWAActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-                        } else {
-                            MaterialAlertDialogBuilder(this)
-                                .setMessage("This component is disabled by the component manager.")
-                                .setPositiveButton(R.string.btn_close) { _, _ -> }
-                                .show()
-                        }
                     }
 
                     if (preferences!!.getAdsEnabled()) {
