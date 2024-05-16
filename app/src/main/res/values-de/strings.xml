@@ -470,4 +470,5 @@
     <string name="cost_template">Kosten: $%.5f eingehend / $%.5f ausgehend\nGesamt: $%.5f</string>
     <string name="cost_loading">Kosten: Laden...</string>
     <string name="cost_counter_usage">Nutzung (Tokens): %s eingehend / %s ausgehend</string>
+    <string name="prompt_no_model_provided">Es wurde kein Modell vorgelegt.</string>
 </resources>

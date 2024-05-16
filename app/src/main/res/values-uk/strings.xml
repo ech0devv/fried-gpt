@@ -468,5 +468,5 @@
     <string name="cost_template">Вартість: $%.5f вх / $%.5f вих\nЗагалом: $%.5f</string>
     <string name="cost_loading">Вартість: Завантаження...</string>
     <string name="cost_counter_usage">Використання (токени): %s вх / %s вих</string>
-    <string name="prompt_no_model_provided">*</string>
+    <string name="prompt_no_model_provided">Модель не надана.</string>
 </resources>

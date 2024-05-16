@@ -468,4 +468,5 @@
     <string name="cost_template">Koszt: $%.5f wejście / $%.5f wyjście\nRazem: $%.5f</string>
     <string name="cost_loading">Koszt: Ładowanie...</string>
     <string name="cost_counter_usage">Użycie (tokeny): %s wejście / %s wyjście</string>
+    <string name="prompt_no_model_provided">Nie dostarczono żadnego modelu.</string>
 </resources>

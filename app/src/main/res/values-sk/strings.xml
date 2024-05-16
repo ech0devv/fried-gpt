@@ -467,4 +467,5 @@
     <string name="cost_template">Cena: $%.5f von / $%.5f dnu\nCelkom: $%.5f</string>
     <string name="cost_loading">Cena: Načítava sa...</string>
     <string name="cost_counter_usage">Použitie (tokeny): %s von / %s dnu</string>
+    <string name="prompt_no_model_provided">Nebol predložený žiadny model.</string>
 </resources>

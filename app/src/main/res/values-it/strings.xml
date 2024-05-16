@@ -471,4 +471,5 @@
     <string name="cost_template">Costo: $%.5f in / $%.5f out\nTotale: $%.5f</string>
     <string name="cost_loading">Costo: Caricamento in corso...</string>
     <string name="cost_counter_usage">Utilizzo (token): %s in / %s out</string>
+    <string name="prompt_no_model_provided">Non è stato fornito alcun modello.</string>
 </resources>

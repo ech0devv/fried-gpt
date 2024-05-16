@@ -469,4 +469,5 @@
     <string name="cost_template">Maliyet: $%.5f gir/ $%.5f çık\nToplam: $%.5f</string>
     <string name="cost_loading">Maliyet: Yükleniyor...</string>
     <string name="cost_counter_usage">Kullanım (tokenler): %s gir / %s çık</string>
+    <string name="prompt_no_model_provided">Herhangi bir model sunulmamıştır.</string>
 </resources>

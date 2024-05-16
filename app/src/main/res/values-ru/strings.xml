@@ -470,4 +470,5 @@
     <string name="cost_template">Стоимость: $%.5f в / $%.5f из\nИтого: $%.5f</string>
     <string name="cost_loading">Стоимость: Загрузка...</string>
     <string name="cost_counter_usage">Использование (токены): %s в / %s из</string>
+    <string name="prompt_no_model_provided">Модель не была предоставлена.</string>
 </resources>
