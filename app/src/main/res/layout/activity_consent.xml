@@ -117,6 +117,7 @@
             android:text="@string/dsnote_nocollect_1"
             android:textColor="@color/text"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView41" />
@@ -132,6 +133,7 @@
             android:textColor="@color/accent_900"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout19" />
@@ -146,6 +148,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/ds_installation_id"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView43" />
@@ -159,6 +162,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/ds_crash_logs"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView44" />
@@ -172,6 +176,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/ds_advertising_id"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView45" />
@@ -185,6 +190,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/ds_device_info_device_model_android_version_etc"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView47" />
@@ -201,6 +207,7 @@
             android:text="@string/dsnote_optional_1"
             android:textColor="@color/text"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView48" />
@@ -216,6 +223,7 @@
             android:textColor="@color/accent_900"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout20" />
@@ -230,6 +238,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/ds_name"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView50" />
@@ -243,6 +252,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/ds_user_generated_content"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView51" />
@@ -259,6 +269,7 @@
             android:text="@string/dsnote_required_1"
             android:textColor="@color/text"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView52" />
@@ -275,6 +286,7 @@
             android:text="@string/ds_footnote_1"
             android:textColor="@color/text"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout21" />
@@ -291,6 +303,7 @@
             android:text="@string/ds_footnote_2"
             android:textColor="@color/text"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView54" />
@@ -304,6 +317,7 @@
             android:textColor="@color/text_title"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -320,6 +334,7 @@
             android:text="@string/ds_description"
             android:textColor="@color/text"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView56" />
@@ -366,6 +381,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:text="@string/label_privacy_policy"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -383,6 +399,7 @@
             android:text="@string/ds_warning"
             android:textColor="@color/error"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView55" />
@@ -405,9 +422,10 @@
             android:layout_marginTop="16dp"
             android:background="@color/accent_200"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView42"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
         <LinearLayout
             android:id="@+id/linearLayout20"
@@ -416,9 +434,10 @@
             android:layout_marginTop="16dp"
             android:background="@color/accent_200"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView49"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
         <LinearLayout
             android:id="@+id/linearLayout21"
@@ -427,9 +446,10 @@
             android:layout_marginTop="16dp"
             android:background="@color/accent_200"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView53"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
         <LinearLayout
             android:id="@+id/linearLayout22"
@@ -438,9 +458,10 @@
             android:layout_marginTop="16dp"
             android:background="@color/accent_200"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView58"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView58" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

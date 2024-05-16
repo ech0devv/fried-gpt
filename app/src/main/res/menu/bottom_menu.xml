@@ -30,12 +30,6 @@
         android:title="Playground"/>
 
     <item
-        android:id="@+id/menu_prompts"
-        android:enabled="true"
-        android:icon="@drawable/ic_apps"
-        android:title="@string/menu_prompts"/>
-
-    <item
         android:id="@+id/menu_tips"
         android:enabled="true"
         android:icon="@drawable/ic_explore"

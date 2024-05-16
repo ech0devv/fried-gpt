@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.REQUEST_ROLE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
-
-    <uses-sdk tools:overrideLibrary="org.teslasoft.core.auth"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-sdk tools:overrideLibrary="dev.ech0.core.auth"/>
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -24,7 +24,7 @@
         <intent>
             <action android:name="android.intent.action.TTS_SERVICE" />
         </intent>
-        <package android:name="org.teslasoft.assistant" />
+        <package android:name="dev.ech0.friedgpt" />
     </queries>
 
     <application
@@ -34,10 +34,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App"
-        android:name=".app.MainApplication"
+        android:name="dev.ech0.friedgpt.app.MainApplication"
         android:installLocation="auto"
         android:enableOnBackInvokedCallback="true"
-        tools:targetApi="tiramisu">
+        tools:targetApi="tiramisu"
+        >
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -94,36 +95,10 @@
         </activity>
 
         <activity
-            android:name="org.teslasoft.core.CrashHandlerActivity"
+            android:name="dev.ech0.core.CrashHandlerActivity"
             android:exported="false"
             android:label="App has been crashed"
             android:theme="@style/UI.Fade">
-        </activity>
-
-        <activity
-            android:name=".ui.activities.PromptViewActivity"
-            android:exported="true"
-            android:theme="@style/Theme.App"
-            android:launchMode="singleTask">
-
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="assistant.teslasoft.org"/>
-                <data android:pathPrefix="/prompts"/>
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ui.activities.ReportAbuseActivity"
-            android:exported="false"
-            android:theme="@style/UI.Fade"
-            android:label="@string/title_report_abuse"
-            android:launchMode="singleTask">
         </activity>
 
         <activity
@@ -159,10 +134,10 @@
         </activity>
 
         <activity
-            android:name="org.teslasoft.assistant.ui.onboarding.WelcomeActivity"
+            android:name="dev.ech0.friedgpt.ui.onboarding.WelcomeActivity"
             android:exported="false"
             android:theme="@style/UI.Fade"
-            android:label="@string/title_welcome_to_speakgpt"
+            android:label="@string/title_welcome_to_FriedGPT"
             android:launchMode="singleTask">
         </activity>
 
@@ -174,7 +149,7 @@
             android:allowTaskReparenting="true"
             android:allowEmbedded="true"
             android:excludeFromRecents="true"
-            android:label="@string/title_speakgpt_mobile_assistant"
+            android:label="@string/title_FriedGPT_mobile_assistant"
             android:launchMode="singleTask">
 
             <intent-filter>
@@ -262,7 +237,7 @@
         </activity>
 
         <activity
-            android:name="org.teslasoft.assistant.ui.onboarding.TermsActivity"
+            android:name="dev.ech0.friedgpt.ui.onboarding.TermsActivity"
             android:exported="false"
             android:theme="@style/UI.Fade"
             android:label="@string/title_terms_of_service"
@@ -270,7 +245,7 @@
         </activity>
 
         <activity
-            android:name="org.teslasoft.assistant.ui.onboarding.ActivationActivity"
+            android:name="dev.ech0.friedgpt.ui.onboarding.ActivationActivity"
             android:exported="false"
             android:theme="@style/UI.Fade"
             android:label="@string/title_setup_api_endpoint"
@@ -377,7 +352,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="org.teslasoft.assistant.fileprovider"
+            android:authorities="dev.ech0.friedgpt.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

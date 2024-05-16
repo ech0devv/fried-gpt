@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:gravity="center"
-                android:text="@string/welcome_to_speakgpt"
+                android:text="@string/welcome_to_FriedGPT"
                 android:textColor="@color/accent_900"
                 android:textSize="24sp"
                 android:textStyle="bold"

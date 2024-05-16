@@ -2,11 +2,11 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlinx-serialization'
-    id 'com.google.gms.google-services'
+    //id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'org.teslasoft.assistant'
+    namespace 'dev.ech0.friedgpt'
     // compileSdkPreview "VanillaIceCream"
     compileSdk 34
 
@@ -15,11 +15,11 @@ android {
     // }
 
     defaultConfig {
-        applicationId "org.teslasoft.assistant"
+        applicationId 'dev.ech0.friedgpt'
         minSdk 28
         targetSdk 34
-        versionCode 409
-        versionName "4.9"
+        versionCode 100
+        versionName '1.0'
     }
 
     buildTypes {
@@ -32,7 +32,7 @@ android {
         }
 
         debug {
-            debuggable false
+            debuggable true
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -68,17 +68,18 @@ dependencies {
     implementation 'io.noties.markwon:ext-strikethrough:4.6.2'
     implementation 'io.noties.markwon:ext-tables:4.6.2'
     implementation 'io.noties.markwon:ext-tasklist:4.6.2'
+    implementation group: 'io.noties.markwon', name: 'linkify', version: '4.6.2'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.14'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha06'
     implementation 'com.google.mlkit:language-id:17.0.5'
     implementation 'cat.ereza:customactivityoncrash:2.4.0'
     implementation 'org.conscrypt:conscrypt-android:2.5.2'
-    implementation 'com.google.android.gms:play-services-ads:23.1.0'
     implementation 'com.aallam.ktoken:ktoken:0.3.0'
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
     implementation platform('com.google.firebase:firebase-bom:33.0.0') {
         exclude group: 'com.google.android.gms', module: 'play-services-ads-lite'
     }
+    implementation 'com.google.android.gms:play-services-location:21.2.0'
 }

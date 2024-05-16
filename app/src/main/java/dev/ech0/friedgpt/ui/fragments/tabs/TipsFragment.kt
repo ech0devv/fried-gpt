@@ -1,0 +1,77 @@
+/**************************************************************************
+ * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **************************************************************************/
+
+package dev.ech0.friedgpt.ui.fragments.tabs
+
+import android.app.Activity
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
+import dev.ech0.friedgpt.R
+import dev.ech0.friedgpt.preferences.Logger
+import dev.ech0.friedgpt.preferences.Preferences
+
+class TipsFragment : Fragment() {
+
+    private var ad: LinearLayout? = null
+    private var onAttach: Boolean = false
+    private var mContext: Context? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_tips, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val preferences: Preferences = Preferences.getPreferences(mContext?: return, "")
+
+        ad = view.findViewById(R.id.ad)
+
+        Thread {
+            while (!onAttach) {
+                Thread.sleep(100)
+            }
+
+            (mContext as Activity?)?.runOnUiThread {
+                    ad?.visibility = View.GONE
+                    Logger.log(mContext?: return@runOnUiThread, "ads", "AdMob", "info", "Ads initialization skipped: Ads are disabled")
+
+            }
+        }.start()
+    }
+
+    override fun onAttach(context: Context) {
+        mContext = context
+        onAttach = true
+
+        super.onAttach(context)
+    }
+
+    override fun onDetach() {
+        mContext = null
+        onAttach = false
+        super.onDetach()
+    }
+}
