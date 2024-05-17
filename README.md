@@ -1,5 +1,7 @@
 # FriedGPT
-![](https://github.com/ech0devv/fried-gpt/assets/87653178/b6e82afe-5477-44ab-a47e-097efcc29995)
+
+
+https://github.com/ech0devv/fried-gpt/assets/87653178/b6e82afe-5477-44ab-a47e-097efcc29995
 
 
 FriedGPT is a fork of SpeakGPT
