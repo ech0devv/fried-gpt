@@ -1534,7 +1534,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                             }
                             function(
                                 name = "showInMaps",
-                                description = "Open places in maps app."
+                                description = "Open places in maps app. If a user wants to see when they close or their reviews, use this"
                             ){
                                 put("type", "object")
                                 putJsonObject("properties"){
