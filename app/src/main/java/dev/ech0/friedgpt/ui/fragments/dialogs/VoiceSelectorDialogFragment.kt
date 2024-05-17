@@ -18,6 +18,7 @@ package dev.ech0.friedgpt.ui.fragments.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.view.View
 import android.widget.ListView
 import android.widget.ProgressBar
@@ -70,12 +71,13 @@ class VoiceSelectorDialogFragment : DialogFragment() {
 
                 if (preferences.getTtsEngine() == "google") {
                     preferences.setVoice(model)
+                    tts!!.setVoice(tts!!.voices.filter { it.name == model }[0])
+                    tts!!.speak("The quick brown fox jumps over the lazy dog.", TextToSpeech.QUEUE_FLUSH, null, "")
                 } else {
                     preferences.setOpenAIVoice(model)
                 }
                 voiceListAdapter?.notifyDataSetChanged()
                 listener?.onVoiceSelected(model)
-                dismiss()
             }
         }
 

@@ -532,11 +532,14 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
             isTTSInitialized = !(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED)
 
             val voices: Set<Voice> = tts!!.voices
+            var matched = false
             for (v: Voice in voices) {
                 if (v.name == preferences!!.getVoice()) {
-                    tts!!.voice = v
+                    tts!!.setVoice(v)
+                    matched = true
                 }
             }
+            Log.d("hi", "${matched}, ${tts!!.voices.map{it.name}.toString()}")
         }
     }
 
@@ -945,7 +948,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
     }
 
     private fun initTTS() {
-        tts = TextToSpeech(mContext ?: return, ttsListener)
+        tts = TextToSpeech(mContext ?: return, ttsListener, "com.google.android.tts")
     }
 
     private fun initAI() {
