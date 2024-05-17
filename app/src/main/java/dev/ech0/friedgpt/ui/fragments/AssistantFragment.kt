@@ -161,6 +161,7 @@ import java.net.URLEncoder
 import java.time.DayOfWeek
 import java.util.Base64
 import java.util.Locale
+import kotlin.coroutines.CoroutineContext
 import kotlin.time.Duration.Companion.seconds
 
 class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpdateListener {
@@ -240,7 +241,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
     private var selectedImageType: String? = null
 
     private var savedInstanceState: Bundle? = null
-
+    private var speechQueue: LinkedHashMap<String, ByteArray> = LinkedHashMap<String, ByteArray>()
     private var mContext: Context? = null
     // weather
     private var fusedLocationClient: FusedLocationProviderClient? = null
@@ -691,6 +692,11 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                 i
             )
         }
+        mediaPlayer?.setOnCompletionListener {
+            if(speechQueue.isNotEmpty()){
+                nextInLineMP()
+            }
+        }
     }
 
     private fun startWhisper() {
@@ -768,6 +774,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                 }
             }
         }
+
     }
 
     private fun stopWhisper() {
@@ -1705,6 +1712,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
     }
 
     private suspend fun regularGPTResponse(shouldPronounce: Boolean) {
+        speechQueue.clear()
         isProcessing = true
         disableAutoScroll = false
         assistantConversation?.transcriptMode = ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL
@@ -1739,7 +1747,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
 
         val completions: Flow<ChatCompletionChunk> =
             ai!!.chatCompletions(chatCompletionRequest)
-
+        var unspoken = ""
         completions.collect { v ->
             run {
                 if (stopper) {
@@ -1751,6 +1759,16 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                     messages[messages.size - 1]["message"] = response
                     adapter?.notifyDataSetChanged()
                     saveSettings()
+
+                        val result = v.choices[0].delta.content!!
+                    if(result.contains(Regex("[!?.]"))){
+                            unspoken += result;
+                            pronounce(shouldPronounce, unspoken)
+                            unspoken = ""
+                     }else{
+                            unspoken += result
+                        }
+
                 }
             }
         }
@@ -1763,7 +1781,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
             content = response
         ))
 
-        pronounce(shouldPronounce, response.replace(Regex("\\(([^\\)]+)\\)"), ""))
+        //pronounce(shouldPronounce, response.replace(Regex("\\(([^\\)]+)\\)"), ""))
 
         saveSettings()
 
@@ -1800,7 +1818,54 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
             }
         }
     }
+    var playerPreparing = false
 
+    private fun nextInLineMP(){
+            if(speechQueue.isNotEmpty() && speechQueue.entries.firstOrNull()!!.value.size != 0){
+                (mContext as Activity?)?.runOnUiThread {
+                    try {
+                        playerPreparing = true
+                        // create temp file that will hold byte array
+                        val tempMp3 = File.createTempFile("audio", "mp3", mContext?.cacheDir)
+                        val fos = FileOutputStream(tempMp3)
+                        val firstEntry: Map.Entry<String, ByteArray>? = speechQueue.entries.firstOrNull()
+                        firstEntry?.let { entry ->
+                            val message = entry.key
+                            val rawAudio = entry.value
+                            fos.write(rawAudio)
+                            fos.close()
+                            speechQueue.remove(message)
+
+                            // resetting mediaplayer instance to evade problems
+                            mediaPlayer?.reset()
+
+                            val fis = FileInputStream(tempMp3)
+                            mediaPlayer?.setDataSource(fis.fd)
+                            mediaPlayer?.prepareAsync()
+
+                            mediaPlayer?.setOnPreparedListener {
+                                mediaPlayer?.start()
+                                playerPreparing = false
+                            }
+                            mediaPlayer?.setOnCompletionListener{
+                                fis.close()
+                                tempMp3.delete()
+                                nextInLineMP()
+                            }
+                        }
+
+                    } catch (ex: IOException) {
+                        Log.e("audio", ex.stackTraceToString())
+                        MaterialAlertDialogBuilder(mContext ?: return@runOnUiThread, R.style.App_MaterialAlertDialog)
+                            .setTitle(R.string.label_audio_error)
+                            .setMessage(ex.stackTraceToString())
+                            .setPositiveButton(R.string.btn_close) { _, _ -> }
+                            .show()
+                    }
+                }
+
+        }
+    }
     private fun speak(message: String) {
         if (preferences!!.getTtsEngine() == "google") {
             tts!!.speak(message, TextToSpeech.QUEUE_FLUSH, null, "")
@@ -1815,6 +1880,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                     }
 
                     try {
+                        speechQueue[message] = ByteArray(0)
                         val rawAudio = openAIAI!!.speech(
                             request = SpeechRequest(
                                 model = ModelId("tts-1"),
@@ -1822,24 +1888,13 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                                 voice = com.aallam.openai.api.audio.Voice(preferences!!.getOpenAIVoice()),
                             )
                         )
-
-                        (mContext as Activity?)?.runOnUiThread {
-                            try {
-                                // create temp file that will hold byte array
-                                val tempMp3 = File.createTempFile("audio", "mp3", mContext?.cacheDir)
-                                tempMp3.deleteOnExit()
-                                val fos = FileOutputStream(tempMp3)
-                                fos.write(rawAudio)
-                                fos.close()
-
-                                // resetting mediaplayer instance to evade problems
-                                mediaPlayer?.reset()
-
-                                val fis = FileInputStream(tempMp3)
-                                mediaPlayer?.setDataSource(fis.fd)
-                                mediaPlayer?.prepare()
-                                mediaPlayer?.start()
-                            } catch (ex: IOException) {
+                        speechQueue[message] = rawAudio
+                        (mContext as Activity?)?.runOnUiThread{
+                            try{
+                                if (!mediaPlayer!!.isPlaying && !playerPreparing) {
+                                    nextInLineMP()
+                                }
+                            }catch(ex: IOException){
                                 MaterialAlertDialogBuilder(mContext ?: return@runOnUiThread, R.style.App_MaterialAlertDialog)
                                     .setTitle(R.string.label_audio_error)
                                     .setMessage(ex.stackTraceToString())
@@ -1847,6 +1902,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                                     .show()
                             }
                         }
+
                     } catch (e: CancellationException) { /* ignore */
                     }
                 }
