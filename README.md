@@ -51,7 +51,7 @@ FriedGPT is a fork of SpeakGPT
 - [x] Better defaults
 - [x] Automatic voice activation when you bring up the assistant.
 - [x] Proper function execution (alarms, timers, duckduckgo, wikipedia, weather)
-- [x] Text-To-Speech streaming
+- [x] Text-To-Speech streaming (for openai's tts, google coming soon)
 - [x] Other fixes and improvements I forgot to mention
 
 > [!NOTE]
