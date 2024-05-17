@@ -1868,7 +1868,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
     }
     private fun speak(message: String) {
         if (preferences!!.getTtsEngine() == "google") {
-            tts!!.speak(message, TextToSpeech.QUEUE_FLUSH, null, "")
+            tts!!.speak(message, TextToSpeech.QUEUE_ADD, null, "")
         } else {
             if (openAIKey == null) {
                 openAIMissing("tts", message)
