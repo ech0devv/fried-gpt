@@ -33,9 +33,8 @@ android {
 
         debug {
             debuggable true
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            shrinkResources false
             multiDexEnabled true
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
