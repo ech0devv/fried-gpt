@@ -1532,6 +1532,21 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                                     add("query")
                                 }
                             }
+                            function(
+                                name = "showInMaps",
+                                description = "Open places in maps app."
+                            ){
+                                put("type", "object")
+                                putJsonObject("properties"){
+                                    putJsonObject("location"){
+                                        put("type", "string")
+                                        put("description", "Search query for maps")
+                                    }
+                                }
+                                putJsonArray("required"){
+                                    add("location")
+                                }
+                            }
                         }
 
                         toolChoice = ToolChoice.Auto
@@ -1634,7 +1649,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
         }
     }
 
-    private val availableFunctions = mapOf("generateImage" to ::generateImage, "wikiQuery" to ::wikiQuery, "getWeather" to ::getWeather, "setTimer" to ::setTimer, "setAlarm" to ::setAlarm, "webSearch" to ::webSearch)
+    private val availableFunctions = mapOf("generateImage" to ::generateImage, "wikiQuery" to ::wikiQuery, "getWeather" to ::getWeather, "setTimer" to ::setTimer, "setAlarm" to ::setAlarm, "webSearch" to ::webSearch, "showInMaps" to ::navigateTo)
 
     private suspend fun ToolCall.Function.execute(callback: suspend (String) -> Unit) {
         val functionToCall = availableFunctions[function.name] ?: error("Function ${function.name} not found")
@@ -1683,6 +1698,11 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
         intent.putExtra(AlarmClock.EXTRA_DAYS, days)
         intent.putExtra(AlarmClock.EXTRA_HOUR, args.getValue("hour").jsonPrimitive.int);
         intent.putExtra(AlarmClock.EXTRA_MINUTES, args.getValue("minute").jsonPrimitive.int);
+        startActivity(intent);
+        callback("success")
+    }
+    private suspend fun navigateTo(args: JsonObject, callback: suspend (String) -> Unit){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query=${URLEncoder.encode(args.getValue("location").jsonPrimitive.content)}"))
         startActivity(intent);
         callback("success")
     }
