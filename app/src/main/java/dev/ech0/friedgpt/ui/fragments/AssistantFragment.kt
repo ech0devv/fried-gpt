@@ -1475,7 +1475,7 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
                             }
                             function(
                                 name = "getWeather",
-                                description = "Get the local weather."
+                                description = "Get the local weather. Times will be GMT+0"
                             ){}
                             function(
                                 name = "setTimer",
@@ -1715,11 +1715,10 @@ class AssistantFragment : BottomSheetDialogFragment(), AbstractChatAdapter.OnUpd
         locationTask.addOnSuccessListener{ result ->
             val lat = result?.latitude.toString()
             val long = result?.longitude.toString()
-            Log.d("LOCATION", "https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,precipitation,wind_speed_10m,wind_direction_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch")
             //callback(URL("https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,precipitation,wind_speed_10m,wind_direction_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch").readText())
             CoroutineScope(Dispatchers.Main).launch {
                 try {
-                    val response = URL("https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,precipitation,wind_speed_10m,wind_direction_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch").readText()
+                    val response = URL("https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,precipitation&hourly=wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch").readText()
                     callback(response)
                 } catch (e: Exception) {
                     Log.e("ERROR", "Exception in weather callback: ${e.message}")
